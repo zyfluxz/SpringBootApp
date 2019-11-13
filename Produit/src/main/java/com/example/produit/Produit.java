@@ -1,11 +1,13 @@
 package com.example.produit;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Produit {
+public class Produit implements Serializable{
 
 	@Id
 	@GeneratedValue
@@ -14,6 +16,7 @@ public class Produit {
 	private float prix_vente,prix_achat;
 	private String description;
 	private int stock;
+	private Categorie categorie;
 	public int getId() {
 		return id;
 	}
@@ -51,12 +54,19 @@ public class Produit {
 		this.description = description;
 	}
 	
+	
+	public Categorie getCategorie() {
+		return categorie;
+	}
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
+	}
 	@Override
 	public String toString() {
 		return "Produit [id=" + id + ", nom=" + nom + ", prix_vente=" + prix_vente + ", prix_achat=" + prix_achat
 				+ ", description=" + description + ", stock=" + stock + "]";
 	}
-	public Produit(int id, String nom, float prix_vente, float prix_achat, String description,int stock) {
+	public Produit(int id, String nom, float prix_vente, float prix_achat, String description,int stock,Categorie categorie) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -64,6 +74,7 @@ public class Produit {
 		this.prix_achat = prix_achat;
 		this.description = description;
 		this.stock=	stock;
+		this.categorie= categorie;
 	}
 	public Produit() {
 		super();
