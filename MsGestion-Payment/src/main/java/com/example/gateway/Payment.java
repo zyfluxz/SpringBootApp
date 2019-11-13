@@ -1,5 +1,6 @@
 package com.example.gateway;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -7,26 +8,38 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 @Entity
 
-public class Payment {
+public class Payment  implements Serializable {
 	@Id
 	@GeneratedValue
 	private int id;
-	private Date datePayment;
 	private String Description;
 	private String origine;
 	private float montant;
+	
+	private Commande commande;
+	
+	
+	
+	public Payment(String description, String origine, float montant, Commande commande) {
+		super();
+		Description = description;
+		this.origine = origine;
+		this.montant = montant;
+		this.commande = commande;
+	}
+	public Commande getCommande() {
+		return commande;
+	}
+	public void setCommande(Commande commande) {
+		this.commande = commande;
+	}
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Date getDatePayment() {
-		return datePayment;
-	}
-	public void setDatePayment(Date datePayment) {
-		this.datePayment = datePayment;
-	}
+
 	public String getDescription() {
 		return Description;
 	}
@@ -45,20 +58,21 @@ public class Payment {
 	public void setMontant(float montant) {
 		this.montant = montant;
 	}
-	public Payment(int id, Date datePayment, String description, String origine, float montant) {
+	public Payment(int id, String description, String origine, float montant) {
 		super();
 		this.id = id;
-		this.datePayment = datePayment;
 		Description = description;
 		this.origine = origine;
 		this.montant = montant;
 	}
-	public Payment(Date datePayment, String description, String origine, float montant) {
+	public Payment(String description, String origine, float montant) {
 		super();
-		this.datePayment = datePayment;
 		Description = description;
 		this.origine = origine;
 		this.montant = montant;
+	}
+	public Payment() {
+		super();
 	}
 	
 	
