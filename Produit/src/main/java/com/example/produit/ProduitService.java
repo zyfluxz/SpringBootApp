@@ -11,6 +11,8 @@ public class ProduitService {
 
 	@Autowired
 	ProduitRepository produitRepository;
+	@Autowired
+	CategorieRepository rep;
 	
 	
 	
@@ -68,6 +70,12 @@ public class ProduitService {
 		}else {
 			return null;
 		}
+	}
+	public Categorie affectProdToCat(int idC,int idP) {
+		Produit prod = produitRepository.findById(idP).get();
+		Categorie cat = rep.findById(idC).get();
+		cat.getProdList().add(prod);
+		return rep.save(cat);
 	}
 
 }

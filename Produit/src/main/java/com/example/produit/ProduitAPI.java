@@ -23,6 +23,8 @@ public class ProduitAPI {
 	
 	@Autowired
 	public ProduitService prodService;
+	@Autowired
+	public CategorieService serv;
 	@RequestMapping("/hello")
 	public String sayHello() {
 		return "hello";
@@ -64,6 +66,10 @@ public class ProduitAPI {
 		return prodService.deleteProduitById(id);
 	}
 	
+	@PostMapping(value="affectPC/{idC}/{idP}" ,produces = MediaType.APPLICATION_JSON_VALUE)
+	public Categorie affectProduit(@PathVariable(value="idC") int idC, @PathVariable(value="idP") int idP) {
+		return prodService.affectProdToCat(idC, idP);
+	}
 	/*@PostMapping(value="/addProduitToStock" , produces = MediaType.APPLICATION_JSON_VALUE)
 	public Stock addProduitToStock(@Param(value="idP") int idP , @Param(value="idS") int idS) {
 		return produitService.addProduitToStock(idP, idS);
