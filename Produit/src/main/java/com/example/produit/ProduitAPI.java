@@ -89,7 +89,7 @@ public class ProduitAPI {
 	
 	@GetMapping("/GetCommande")
 	public ResponseEntity<String> sayTest() {
-	    final String uri = "http://192.168.99.100:8182/1";
+	    final String uri = "http://192.168.99.100:8182/commandes/1";
 	     
 	    RestTemplate restTemplate = new RestTemplate();
 	     
