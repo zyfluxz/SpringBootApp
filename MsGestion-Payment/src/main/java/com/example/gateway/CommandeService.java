@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 public class CommandeService {
 	@Autowired
 	private CommandeRepository commandeRepository;
+	@Autowired
+	private PaymentRepository paymentRepository;
 	
 	public Commande addCommande(Commande commande) {
 		return commandeRepository.save(commande);
@@ -22,16 +24,22 @@ public class CommandeService {
 		return commandeRepository.findAll();
 	}
 	
-	public Commande getProduitById(int id) {
+	public Commande getCommandeById(int id) {
 		return commandeRepository.findById(id).get();
 	}
 	
-	public Commande getProduitByEtat(Boolean etat) {
+	public Commande getCommandeByEtat(Boolean etat) {
 		return commandeRepository.getCommandeByEtat(etat);
 	}
+	public Commande affectPayment(int idp ,int idc) {
+Commande c = commandeRepository.findById(idc).get();
+Payment p = paymentRepository.findById(idp).get();
+c.setPayement(p);
+return commandeRepository.save(c) ;
+
+}
 	
-	public String deleteProduitById(int id) {
-		CrudRepository<Commande, Integer> produitRepository;
+	public String deleteCommandeById(int id) {
 		if(commandeRepository.findById(id).isPresent()) {
 			commandeRepository.delete(commandeRepository.findById(id).get());
 			return "Produit supprimé";
