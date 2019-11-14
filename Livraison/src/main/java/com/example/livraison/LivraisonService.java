@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+
 @Service
 public class LivraisonService {
 
@@ -38,6 +39,18 @@ public class LivraisonService {
 		}
 	}
 	
-	
+	public Livraison updateLivraison(int id,Livraison newLivraison) {
+		if(rep.findById(id).isPresent()) {
+			Livraison existingLivraison = rep.findById(id).get();
+			if(newLivraison.getFournisseur() != null) {
+				existingLivraison.setFournisseur(newLivraison.getFournisseur() );
+			}
+		
+			
+			return rep.save(existingLivraison);
+		}else {
+			return null;
+		}
+	}
 
 }

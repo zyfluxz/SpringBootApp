@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+
 @Service
 public class EntrepotService {
 
@@ -45,7 +46,22 @@ public class EntrepotService {
 		}
 	}
 	
-
+	public Entrepot updateEntrepot(int id,Entrepot newEntrepot) {
+		if(EntrepotRepository.findById(id).isPresent()) {
+			Entrepot existingEntrepot = EntrepotRepository.findById(id).get();
+			if(newEntrepot.getLieu() != null) {
+				existingEntrepot.setLieu(newEntrepot.getLieu() );
+			}
+			if(newEntrepot.getRayon() != null) {
+				existingEntrepot.setRayon(newEntrepot.getRayon());
+			}
+			
+			
+			return EntrepotRepository.save(existingEntrepot);
+		}else {
+			return null;
+		}
+	}
 	
 
 }
